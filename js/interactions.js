@@ -66,27 +66,32 @@
       rail.appendChild(card);
     });
 
-    /* Drag-to-scroll (desktop mouse) */
+    /* Drag-to-scroll (mouse + touch via pointer events) */
     let isDown = false, startX = 0, startScroll = 0, moved = false;
 
-    rail.addEventListener("pointerdown", (e) => {
-      if (e.pointerType !== "mouse") return;
+    function onStart(e) {
       isDown = true;
       moved = false;
       startX = e.clientX;
       startScroll = rail.scrollLeft;
-      rail.setPointerCapture(e.pointerId);
-    });
-    rail.addEventListener("pointermove", (e) => {
+      try { rail.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+    }
+    function onMove(e) {
       if (!isDown) return;
       const dx = e.clientX - startX;
       if (Math.abs(dx) > 6) moved = true;
       rail.scrollLeft = startScroll - dx;
-    });
-    rail.addEventListener("pointerup", (e) => {
+    }
+    function onEnd(e) {
       isDown = false;
       try { rail.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
-    });
+    }
+
+    rail.addEventListener("pointerdown", onStart);
+    rail.addEventListener("pointermove", onMove);
+    rail.addEventListener("pointerup", onEnd);
+    rail.addEventListener("pointercancel", onEnd);
+
     rail.addEventListener("click", (e) => {
       if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
     }, true);

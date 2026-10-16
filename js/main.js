@@ -66,6 +66,7 @@
 
   /* ---------- Scroll reveals ---------- */
   const revealEls = document.querySelectorAll(".reveal, .section-head, .finale-title");
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
@@ -76,7 +77,7 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      { threshold: isMobile ? 0.08 : 0.15, rootMargin: "0px 0px -5% 0px" }
     );
     revealEls.forEach((el) => io.observe(el));
   } else {
@@ -99,7 +100,7 @@
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: isMobile ? 0.08 : 0.12 }
     );
     cards.forEach((c) => cardIo.observe(c));
   }

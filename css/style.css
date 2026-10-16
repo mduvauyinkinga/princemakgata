@@ -853,10 +853,15 @@ em { font-style: italic; }
   .about-grid, .visit-grid { grid-template-columns: 1fr; }
   .about-visual { max-width: 440px; }
   .footer-meta { text-align: left; }
+  .lookbook-rail { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .look-card { scroll-snap-align: center; flex: 0 0 clamp(260px, 85vw, 340px); }
 }
 @media (max-width: 600px) {
   .hero-actions .btn { width: 100%; text-align: center; }
   .fab-label { display: none; }
   .whatsapp-fab { padding: 0.95rem; border-radius: 50%; }
   .reviews-score { gap: 0.8rem; }
+  .look-card { flex: 0 0 clamp(280px, 90vw, 340px); }
+  .lookbook-rail { padding-bottom: 2rem; scroll-padding-right: var(--pad); }
+  .section { padding: clamp(2.5rem, 8vw, 5rem) var(--pad); }
 }
