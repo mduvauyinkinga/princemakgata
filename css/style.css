@@ -847,6 +847,7 @@ em { font-style: italic; }
 .lightbox-close:hover { border-color: var(--gold); color: var(--gold-hi); }
 
 /* ---------- Responsive ---------- */
+/* Mobile: force all reveal content visible immediately so customers never see blank sections */
 @media (max-width: 960px) {
   .site-nav, .header-cta { display: none; }
   .nav-toggle { display: flex; }
@@ -855,6 +856,11 @@ em { font-style: italic; }
   .footer-meta { text-align: left; }
   .lookbook-rail { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
   .look-card { scroll-snap-align: center; flex: 0 0 clamp(260px, 85vw, 340px); }
+  .reveal, .look-card, .service-card, .review-card, .section-title, .hero-title .word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-title .line { overflow: visible; }
 }
 @media (max-width: 600px) {
   .hero-actions .btn { width: 100%; text-align: center; }
@@ -864,4 +870,9 @@ em { font-style: italic; }
   .look-card { flex: 0 0 clamp(280px, 90vw, 340px); }
   .lookbook-rail { padding-bottom: 2rem; scroll-padding-right: var(--pad); }
   .section { padding: clamp(2.5rem, 8vw, 5rem) var(--pad); }
+  .reveal, .look-card, .service-card, .review-card, .section-title, .hero-title .word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-title .line { overflow: visible; }
 }
